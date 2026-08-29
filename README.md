@@ -1,4 +1,5 @@
 # Kanban — Spring Boot Refactor
+![CI](https://github.com/D1R3kT/kanban-spring-refactor/actions/workflows/ci.yml/badge.svg)
 
 A task tracker (Kanban board) originally built on a hand-rolled Java HTTP server,
 re-engineered as a modular Spring Boot application.
