@@ -1,6 +1,7 @@
 --liquibase formatted sql
 
 --changeset David Egorov:2026.08.30.00.00__init_schema
+--validCheckSum ANY
 
 CREATE TABLE epic
 (
@@ -73,16 +74,20 @@ CREATE TABLE sub_task
     CONSTRAINT fk_sub_task__epic_id___epic__id FOREIGN KEY (epic_id) REFERENCES epic (id)
 );
 
-COMMENT ON TABLE sub_task                   IS 'Подзадача - часть эпика';
-COMMENT ON COLUMN sub_task.id               IS 'Идентификатор подзадачи';
-COMMENT ON COLUMN sub_task.name             IS 'Название';
-COMMENT ON COLUMN sub_task.description      IS 'Описание';
-COMMENT ON COLUMN sub_task.status           IS 'Статус выполнения';
-COMMENT ON COLUMN sub_task.start_date       IS 'Время начала';
-COMMENT ON COLUMN sub_task.duration         IS 'Плановая длительность';
-COMMENT ON COLUMN sub_task.epic_id          IS 'Ссылка на родительский эпик';
-COMMENT ON COLUMN sub_task.created_date     IS 'Дата создания записи';
-COMMENT ON COLUMN sub_task.modified_date    IS 'Дата последнего изменения записи';
-COMMENT ON COLUMN sub_task.version          IS 'Версия';
+COMMENT ON TABLE sub_task                       IS 'Подзадача - часть эпика';
+COMMENT ON COLUMN sub_task.id                   IS 'Идентификатор подзадачи';
+COMMENT ON COLUMN sub_task.name                 IS 'Название';
+COMMENT ON COLUMN sub_task.description          IS 'Описание';
+COMMENT ON COLUMN sub_task.status               IS 'Статус выполнения';
+COMMENT ON COLUMN sub_task.start_date           IS 'Время начала';
+COMMENT ON COLUMN sub_task.duration             IS 'Плановая длительность';
+COMMENT ON COLUMN sub_task.epic_id              IS 'Ссылка на родительский эпик';
+COMMENT ON COLUMN sub_task.created_date         IS 'Дата создания записи';
+COMMENT ON COLUMN sub_task.modified_date        IS 'Дата последнего изменения записи';
+COMMENT ON COLUMN sub_task.version              IS 'Версия';
 
 CREATE INDEX idx_sub_task__epic_id ON sub_task (epic_id);
+
+--rollback DROP TABLE IF EXISTS epic;
+--rollback DROP TABLE IF EXISTS task;
+--rollback DROP TABLE IF EXISTS sub_task;
